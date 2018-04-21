@@ -1,0 +1,139 @@
+### Global Variables
+GameBoard = ['#','1','2','3','4','5','6','7','8','9']
+Players=None
+
+### User Input ## Welcomes Player and asks them to play a game?
+def WelcomeInput():
+    YesNo = input("\nGREETINGS\nSHALL WE PLAY A GAME? (Y/N)\n")
+    if YesNo.upper() == "Y":
+        print("\nEXCELLENT LET'S BEGIN\n")
+    elif YesNo.upper() == "N":
+        print("\nGOODBYE\n")
+        exit()
+    else:
+        WelcomeInput()
+
+### Pretty self explainatory, Prints Board. Don't know how to make this bigger or prettier yet.
+def DisplayBoard(B):
+    ### B represents the board list
+    print(f"\n{B[1]}|{B[2]}|{B[3]}\n-----".format(B))
+    print(f"{B[4]}|{B[5]}|{B[6]}\n-----".format(B))
+    print(f"{B[7]}|{B[8]}|{B[9]}\n".format(B))
+
+### Resets the board back to Originals
+def ResetBoard():
+    global GameBoard
+    GameBoard = ['#','1','2','3','4','5','6','7','8','9']
+
+### User Input ### Player1 Selects either X or O
+def PlayerInput():
+    global Players
+    Play1=None
+    Play2=None
+    Play1 = input("\nPLAYER1 PLEASE PICK X OR 0.\n")
+    if Play1.upper() == "X":
+        print("\nPLAYER 1 IS X\n")
+        Play2='O'
+        print("\nPLAYER 2 IS O\n")
+    elif Play1.upper() == "O":
+        print("\nPLAYER 1 IS O\n")
+        Play2='X'
+        print("\nPLAYER 2 IS X\n")
+    else:
+        print("\nINVALID INPUT, TRY AGAIN.\n")
+        Play1=None
+        Play2=None
+    Players=list([Play1,Play2])
+
+### User Input ### Player1 Selects either X or O
+def ChooseInput():
+    PlayerInput()
+    InputBreak=1
+    if InputBreak == 4:
+        exit()
+    if Players[0] == None:
+        PlayerInput()
+        InputBreak+=1
+
+def WhoWins(GB,P1,P2):
+    ### Checks to see if Win/Lose/Stalemate has occured. (GameBoard,Player1,Player2)
+    if ((GB[1]==GB[2]==GB[3]==P1) or 
+        (GB[4]==GB[5]==GB[6]==P1) or 
+        (GB[7]==GB[8]==GB[9]==P1) or 
+        (GB[1]==GB[4]==GB[6]==P1) or 
+        (GB[2]==GB[5]==GB[8]==P1) or 
+        (GB[3]==GB[6]==GB[9]==P1) or 
+        (GB[1]==GB[5]==GB[9]==P1) or 
+        (GB[3]==GB[5]==GB[7]==P1)):
+        return 1
+    elif ((GB[1]==GB[2]==GB[3]==P2) or 
+        (GB[4]==GB[5]==GB[6]==P2) or 
+        (GB[7]==GB[8]==GB[9]==P2) or 
+        (GB[1]==GB[4]==GB[6]==P2) or 
+        (GB[2]==GB[5]==GB[8]==P2) or 
+        (GB[3]==GB[6]==GB[9]==P2) or 
+        (GB[1]==GB[5]==GB[9]==P2) or 
+        (GB[3]==GB[5]==GB[7]==P2)):
+        return 2
+    else:
+        pass
+
+### Take in user input for desired location of marker on their turn, also checks the WhoWins() value
+def GameInput(Player,P):
+    global GameBoard
+    
+    DisplayBoard(GameBoard)
+    
+    if WhoWins(GameBoard,Players[0],Players[1]) == None:
+        InputPos = input(f"\nPLAYER{Player}'S TURN, PLEASE SELECT A POSITION[1-9]\n".format())
+        InputIndex=int(InputPos)
+        if InputPos.upper() in GameBoard:
+            GameBoard[InputIndex] = P.upper()
+            pass
+        elif GameBoard[InputIndex] == Players[0] or Players[1]:
+            print("\nPOSITION ALREADY TAKEN, PLEASE TRY AGAIN.\n")
+            GameInput(Player,P)
+
+def PlayGame():
+    Counter=0
+    while Counter !=9:
+        if (WhoWins(GameBoard,Players[0],Players[1])==1) or (WhoWins(GameBoard,Players[0],Players[1])==2):
+            Counter=9
+        elif Counter%2==0:
+            Counter+=1
+            GameInput(1,Players[0])
+        elif Counter%2!=0:
+            Counter+=1
+            GameInput(2,Players[1])
+    
+    if (WhoWins(GameBoard,Players[0],Players[1])==1):
+        print("Player 1 Wins!")
+        DisplayBoard(GameBoard)
+    elif (WhoWins(GameBoard,Players[0],Players[1])==2):
+        print("Player 2 Wins!")
+        DisplayBoard(GameBoard)
+    elif Counter==9:
+        print("Stalemate!")
+        DisplayBoard(GameBoard)
+
+### Asks the user if they would like to play again.
+def PlayAgain():
+    PlayInput=input("\nWOULD YOU LIKE TO PLAY A AGAIN?[Y/N]\n")
+    PlayInput=PlayInput.upper()
+    if PlayInput == "Y":
+        print("\nEXCELLENT LET'S BEGIN\n")
+        ResetBoard()
+        ChooseInput()
+        PlayGame()
+        PlayAgain()
+    else:
+        print("\nGOODBYE\n")
+        exit()
+
+WelcomeInput()
+
+ChooseInput()
+
+PlayGame()
+
+PlayAgain()
