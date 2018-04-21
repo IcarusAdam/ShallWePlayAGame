@@ -1,9 +1,4 @@
 
-# coding: utf-8
-
-# In[ ]:
-
-
 ### Global Variables ### Subject to Change
 from IPython.display import clear_output
 InputBreak = 1
@@ -12,10 +7,6 @@ Player2 = None
 GameBoard = ['#','1','2','3','4','5','6','7','8','9']
 AllowedPos = ["#","1","2","3","4","5","6","7","8","9"]
 Counter = 0
-
-
-# In[ ]:
-
 
 ### User Input ## Welcomes Player and asks them to play a game?
 def WelcomeInput():
@@ -28,17 +19,9 @@ def WelcomeInput():
     else:
         WelcomeInput()
 
-
-# In[ ]:
-
-
 ### Pretty self explainatory, Prints Board. Don't know how to make this bigger or prettier yet.
 def DisplayBoard(Board):
     print(f"\n\n{Board[1]}|{Board[2]}|{Board[3]}\n-----\n{Board[4]}|{Board[5]}|{Board[6]}\n------\n{Board[7]}|{Board[8]}|{Board[9]}\n\n".format(Board))
-
-
-# In[ ]:
-
 
 ### Resets the board back to Originals
 def ResetBoard():
@@ -54,10 +37,6 @@ def ResetBoard():
     GameBoard = ['#','1','2','3','4','5','6','7','8','9']
     AllowedPos = ["#","1","2","3","4","5","6","7","8","9"]
     Counter = 0
-
-
-# In[ ]:
-
 
 ### User Input ### Player1 Selects either X or O
 def PlayerInput():
@@ -79,10 +58,6 @@ def PlayerInput():
             Player2=None
             InputBreak += 1
 
-
-# In[ ]:
-
-
 ### User Input ### Player1 Selects either X or O
 def ChooseInput():
     global InputBreak
@@ -97,10 +72,6 @@ def ChooseInput():
     else:
         pass
 
-
-# In[ ]:
-
-
 ### Checks to see if Win/Lose/Stalemate has occured.
 def WhoWins():
     if (GameBoard[1]==GameBoard[2]==GameBoard[3]==Player1)or(GameBoard[4]==GameBoard[5]==GameBoard[6]==Player1)or(GameBoard[7]==GameBoard[8]==GameBoard[9]==Player1)or(GameBoard[1]==GameBoard[4]==GameBoard[6]==Player1)or(GameBoard[2]==GameBoard[5]==GameBoard[8]==Player1)or(GameBoard[3]==GameBoard[6]==GameBoard[9]==Player1)or(GameBoard[1]==GameBoard[5]==GameBoard[9]==Player1)or(GameBoard[3]==GameBoard[5]==GameBoard[7]==Player1):
@@ -111,10 +82,6 @@ def WhoWins():
         return 3
     else:
         pass
-
-
-# In[ ]:
-
 
 ### Take in user input for desired location of marker on their turn, also checks the WhoWins() value
 def GameInput(Player,Letter):
@@ -144,10 +111,6 @@ def GameInput(Player,Letter):
         print("STALEMATE!")
         DisplayBoard(GameBoard)
 
-
-# In[ ]:
-
-
 ### Runs the GameInput Function whilst inserting Player1/Player2 details into the function, checks if the Counter has reached 10
 def PlayGame():
     global Counter
@@ -158,29 +121,6 @@ def PlayGame():
         elif Counter%2==0:
             GameInput(2,Player2)
             Counter += 1
-
-
-# In[ ]:
-
-
-WelcomeInput()
-
-
-# In[ ]:
-
-
-ChooseInput()
-
-
-# In[ ]:
-
-
-PlayGame()
-
-
-# In[ ]:
-
-
 ### Asks the user if they would like to play again.
 def PlayAgain():
     PlayInput=input("\nWOULD YOU LIKE TO PLAY A AGAIN?[Y/N]")
@@ -194,11 +134,12 @@ def PlayAgain():
         exit()
     else:
         print("\nGOODBYE\n")
-        exit()       
+        exit()
 
+WelcomeInput()
 
-# In[ ]:
+ChooseInput()
 
+PlayGame()
 
 PlayAgain()
-
