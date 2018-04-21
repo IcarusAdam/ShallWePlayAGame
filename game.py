@@ -20,7 +20,10 @@ def WelcomeInput():
 
 ### Pretty self explainatory, Prints Board. Don't know how to make this bigger or prettier yet.
 def DisplayBoard(Board):
-    print(f"\n\n{Board[1]}|{Board[2]}|{Board[3]}\n-----\n{Board[4]}|{Board[5]}|{Board[6]}\n------\n{Board[7]}|{Board[8]}|{Board[9]}\n\n".format(Board))
+    print(f"\n{Board[1]}|{Board[2]}|{Board[3]}\n-----".format(Board))
+    print(f"{Board[4]}|{Board[5]}|{Board[6]}\n-----".format(Board))
+    print(f"{Board[7]}|{Board[8]}|{Board[9]}\n".format(Board))
+
 
 ### Resets the board back to Originals
 def ResetBoard():
