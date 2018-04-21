@@ -73,9 +73,23 @@ def ChooseInput():
 
 ### Checks to see if Win/Lose/Stalemate has occured.
 def WhoWins():
-    if (GameBoard[1]==GameBoard[2]==GameBoard[3]==Player1) or (GameBoard[4]==GameBoard[5]==GameBoard[6]==Player1) or (GameBoard[7]==GameBoard[8]==GameBoard[9]==Player1) or(GameBoard[1]==GameBoard[4]==GameBoard[6]==Player1) or (GameBoard[2]==GameBoard[5]==GameBoard[8]==Player1) or (GameBoard[3]==GameBoard[6]==GameBoard[9]==Player1) or (GameBoard[1]==GameBoard[5]==GameBoard[9]==Player1) or (GameBoard[3]==GameBoard[5]==GameBoard[7]==Player1):
+    if ((GameBoard[1]==GameBoard[2]==GameBoard[3]==Player1) or 
+    	(GameBoard[4]==GameBoard[5]==GameBoard[6]==Player1) or 
+    	(GameBoard[7]==GameBoard[8]==GameBoard[9]==Player1) or 
+    	(GameBoard[1]==GameBoard[4]==GameBoard[6]==Player1) or 
+    	(GameBoard[2]==GameBoard[5]==GameBoard[8]==Player1) or 
+    	(GameBoard[3]==GameBoard[6]==GameBoard[9]==Player1) or 
+    	(GameBoard[1]==GameBoard[5]==GameBoard[9]==Player1) or 
+    	(GameBoard[3]==GameBoard[5]==GameBoard[7]==Player1)):
         return 1
-    elif (GameBoard[1]==GameBoard[2]==GameBoard[3]==Player2) or (GameBoard[4]==GameBoard[5]==GameBoard[6]==Player2) or (GameBoard[7]==GameBoard[8]==GameBoard[9]==Player2) or (GameBoard[1]==GameBoard[4]==GameBoard[6]==Player2) or (GameBoard[2]==GameBoard[5]==GameBoard[8]==Player2) or (GameBoard[3]==GameBoard[6]==GameBoard[9]==Player2) or (GameBoard[1]==GameBoard[5]==GameBoard[9]==Player2) or (GameBoard[3]==GameBoard[5]==GameBoard[7]==Player2):
+    elif ((GameBoard[1]==GameBoard[2]==GameBoard[3]==Player2) or 
+    	(GameBoard[4]==GameBoard[5]==GameBoard[6]==Player2) or 
+    	(GameBoard[7]==GameBoard[8]==GameBoard[9]==Player2) or 
+    	(GameBoard[1]==GameBoard[4]==GameBoard[6]==Player2) or 
+    	(GameBoard[2]==GameBoard[5]==GameBoard[8]==Player2) or 
+    	(GameBoard[3]==GameBoard[6]==GameBoard[9]==Player2) or 
+    	(GameBoard[1]==GameBoard[5]==GameBoard[9]==Player2) or 
+    	(GameBoard[3]==GameBoard[5]==GameBoard[7]==Player2)):
         return 2
     elif Counter==9:
         return 3
