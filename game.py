@@ -1,4 +1,4 @@
-
+### ShallWePlayAGame?
 ### Global Variables ### Subject to Change
 InputBreak = 1
 Player1 = None
