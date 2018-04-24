@@ -1,13 +1,15 @@
 ### Global Variables ### Subject to Change
 GameBoard = ['#','1','2','3','4','5','6','7','8','9']
 Players = None
+Yes = ["YES","Y"]
+No = ["NO","N"]
 
 ### User Input ## Welcomes Player and asks them to play a game?
 def welcome_input():
     Yes_No = input("\nGREETINGS\nSHALL WE PLAY A GAME? (Y/N)\n")
-    if Yes_No.upper() == "Y":
+    if Yes_No.upper() in Yes:
         print("\nEXCELLENT LET'S BEGIN\n")
-    elif Yes_No.upper() == "N":
+    elif Yes_No.upper() in No:
         print("\nGOODBYE\n")
         exit()
     else:
@@ -135,15 +137,17 @@ def play_again():
     global GameBoard
     PlayInput=input("\nWOULD YOU LIKE TO PLAY A AGAIN?[Y/N]\n")
     PlayInput=PlayInput.upper()
-    if PlayInput == "Y" and "Yes":
+    if PlayInput in Yes:
         print("\nEXCELLENT LET'S BEGIN\n")
         GameBoard = ['#','1','2','3','4','5','6','7','8','9']
         choose_input()
         play_game()
         play_again()
-    else:
+    elif PlayInput in No:
         print("\nGOODBYE\n")
         exit()
+    else:
+    	play_again()
 
 welcome_input()
 
