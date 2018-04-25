@@ -1,5 +1,4 @@
 def input_check(user_input,scenario):
-
 	if scenario == 'A':
 		if user_input in ('Y','N'):
 			return Truea
@@ -16,12 +15,10 @@ def input_check(user_input,scenario):
 		else:
 			return False
 
-
 def display_board(B):
 	print(f'\n{B[7]}|{B[8]}|{B[9]}\n-----')
 	print(f'{B[4]}|{B[5]}|{B[6]}\n-----')
 	print(f'{B[1]}|{B[2]}|{B[3]}\n')
-
 
 def winner(B,P1,P2):
 	if ((B[1] == B[2] == B[3] == P1) or
@@ -45,7 +42,6 @@ def winner(B,P1,P2):
 	else:
 		return None
 
-
 def welcome():
 	user_input = input('\nWould you like to play a game? [Y/N]\n')
 	user_input = user_input.upper()
@@ -58,7 +54,6 @@ def welcome():
 	else:
 		print('\nInvalid Input\n')
 		welcome()
-
 
 def choose_input():
 	Player1 = None
@@ -130,8 +125,7 @@ def play_game():
 		display_board(GB)
 	elif winner(GB,P1,P2) == False:
 		print('\nPlayer 2 Wins\n')
-		display_board(GB)
-				
+		display_board(GB)	
 
 def play_again():
 	again_input = input('\nWould you like to play again? [Y/N]\n')
@@ -148,6 +142,9 @@ def play_again():
 	else:
 		print('\nHow unfortunate, Goodbye.\n')
 		exit()
+
 welcome()
+
 play_game()
+
 play_again()
