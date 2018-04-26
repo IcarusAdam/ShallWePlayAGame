@@ -1,157 +1,149 @@
-### Global Variables ### Subject to Change
-GameBoard = ['#','1','2','3','4','5','6','7','8','9']
-Players = None
-Yes = ["YES","Y"]
-No = ["NO","N"]
+def input_check(user_input,scenario):
+	if scenario == 'A':
+		if user_input in ('Y','N'):
+			return Truea
+		else:
+			return False
+	elif scenario == 'B':
+		if user_input in ('X','O'):
+			return True
+		else:
+			return False
+	elif scenario == 'C':
+		if user_input in ('1','2','3','4','5','6','7','8','9'):
+			return True
+		else:
+			return False
 
-### User Input ## Welcomes Player and asks them to play a game?
-def welcome_input():
-    Yes_No = input("\nGREETINGS\nSHALL WE PLAY A GAME? (Y/N)\n")
-    if Yes_No.upper() in Yes:
-        print("\nEXCELLENT LET'S BEGIN\n")
-    elif Yes_No.upper() in No:
-        print("\nGOODBYE\n")
-        exit()
-    else:
-        welcome_input()
-
-def check_input(user_input):
-    valid_input = ['1','2','3','4','5','6','7','8','9',"X","O","Y","N","YES","NO"]
-    if user_input in valid_input:
-        return True
-    if user_input not in valid_input:
-        return False
-
-### Pretty self explainatory, Prints Board. Don't know how to make this bigger or prettier yet.
 def display_board(B):
-    ### B represents the board list
-    print(f"\n{B[1]}|{B[2]}|{B[3]}\n-----")
-    print(f"{B[4]}|{B[5]}|{B[6]}\n-----")
-    print(f"{B[7]}|{B[8]}|{B[9]}\n")
+	print(f'\n{B[7]}|{B[8]}|{B[9]}\n-----')
+	print(f'{B[4]}|{B[5]}|{B[6]}\n-----')
+	print(f'{B[1]}|{B[2]}|{B[3]}\n')
 
-### User Input ### Player1 Selects either X or O
-def player_input():
-    global Players
-    Play1 = None
-    Play2 = None
-    Play1 = input("\nPLAYER1 PLEASE PICK X OR 0.\n")
-    if Play1.upper() == "X":
-        print("\nPLAYER 1 IS X\n")
-        Play2 = 'O'
-        print("\nPLAYER 2 IS O\n")
-    elif Play1.upper() == "O":
-        print("\nPLAYER 1 IS O\n")
-        Play2 = 'X'
-        print("\nPLAYER 2 IS X\n")
-    else:
-        print("\nINVALID INPUT, TRY AGAIN.\n")
-        Play1 = None
-        Play2 = None
-    Players = list(["#",Play1,Play2])
+def winner(B,P1,P2):
+	if ((B[1] == B[2] == B[3] == P1) or
+		(B[4] == B[5] == B[6] == P1) or
+		(B[7] == B[8] == B[9] == P1) or
+		(B[1] == B[4] == B[6] == P1) or
+		(B[2] == B[5] == G[8] == P1) or
+		(B[3] == B[6] == B[9] == P1) or
+		(B[1] == B[5] == B[9] == P1) or
+		(B[3] == B[5] == B[7] == P1)):
+		return True
+	elif ((B[1] == B[2] == B[3] == P2) or
+		(B[4] == B[5] == B[6] == P2) or
+		(B[7] == B[8] == B[9] == P2) or
+		(B[1] == B[4] == B[6] == P2) or
+		(B[2] == B[5] == G[8] == P2) or
+		(B[3] == B[6] == B[9] == P2) or
+		(B[1] == B[5] == B[9] == P2) or
+		(B[3] == B[5] == B[7] == P2)):
+		return False
+	else:
+		return None
 
-### User Input ### Player1 Selects either X or O
+def welcome():
+	user_input = input('\nWould you like to play a game? [Y/N]\n')
+	user_input = user_input.upper()
+	if input_check(user_input,'A') == True:
+		if user_input in ('Y'):
+			print('\nGreat, Let us Begin.\n')
+		else:
+			print('\nHow unfortunate, Goodbye.\n')
+			exit()
+	else:
+		print('\nInvalid Input\n')
+		welcome()
+
 def choose_input():
-    player_input()
-    input_break = 1
-    if input_break == 4:
-        exit()
-    if Players[1 or 2] == None:
-        player_input()
-        input_break += 1
+	Player1 = None
+	Player2 = None
+	while Player1 == None:
+		Player1 = input('\nPlayer 1, Please select X or O.\n')
+		Player1 = Player1.upper()
+		if input_check(Player1,'B') == True:
+			if Player1 in ('X'):
+				Player2 = 'O'
+				pass
+			elif Player1 in ('O'):
+				Player2 = 'X'
+				pass
+			else:
+				print('\nError, Please try again.\n')
+				choose_input()
+		elif input_check(Player1,'B'):
+			print('\nInvalid Input\n')
+			choose_input()
 
-def who_wins(GB,P1,P2):
-    ### Checks to see if Win/Lose/Stalemate has occured. (GameBoard,Player1,Player2)
-    if ((GB[1] == GB[2] == GB[3] == P1) or 
-        (GB[4] == GB[5] == GB[6] == P1) or 
-        (GB[7] == GB[8] == GB[9] == P1) or 
-        (GB[1] == GB[4] == GB[6] == P1) or 
-        (GB[2] == GB[5] == GB[8] == P1) or 
-        (GB[3] == GB[6] == GB[9] == P1) or 
-        (GB[1] == GB[5] == GB[9] == P1) or 
-        (GB[3] == GB[5] == GB[7] == P1)):
-        return True
-    elif ((GB[1] == GB[2] == GB[3] == P2) or 
-        (GB[4] == GB[5] == GB[6] == P2) or 
-        (GB[7] == GB[8] == GB[9] == P2) or 
-        (GB[1] == GB[4] == GB[6] == P2) or 
-        (GB[2] == GB[5] == GB[8] == P2) or 
-        (GB[3] == GB[6] == GB[9] == P2) or 
-        (GB[1] == GB[5] == GB[9] == P2) or 
-        (GB[3] == GB[5] == GB[7] == P2)):
-        return False
-    else:
-        return None
+	print(f'\nPlayer 1 is {Player1}.\nPlayer 2 is {Player2}.\n')
 
-### Take in user input for desired location of marker on their turn, also checks the WhoWins() value
-def game_input(Player,P):
-    global GameBoard
-    
-    display_board(GameBoard)
-    
-    if who_wins(GameBoard,Players[1],Players[2]) == None:
-        InputPos = input(f"\nPLAYER{Player}'S TURN, PLEASE SELECT A POSITION[1-9]\n")
-        if check_input(InputPos) == True:
-            pass
-        elif check_input(InputPos) == False:
-            print("\nINVALID INPUT, TRY AGAIN.\n")
-            game_input(Player,P)
-
-        InputIndex=int(InputPos)
-        if InputPos.upper() in GameBoard:
-            GameBoard[InputIndex] = P.upper()
-            pass
-        elif GameBoard[InputIndex] == Players[1] or Players[2]:
-            print("\nPOSITION ALREADY TAKEN, PLEASE TRY AGAIN.\n")
-            game_input(Player,P)
+	return ('#',Player1,Player2)
 
 def play_game():
-    Counter = 1
-    P1Wins = "\nPlayer 1 Wins!\n"
-    P2Wins = "\nPlayer 2 Wins!\n"
-    Stale = "\nStalemate!\n"
+	GB = ['#','1','2','3','4','5','6','7','8','9']
+	Hash,P1,P2 = choose_input()
+	Counter = 1
 
-    while Counter != 10:
-        if (who_wins(GameBoard,Players[1],Players[2]) != None):
-            Counter = 10
-        elif Counter %2 == 0:
-        	game_input(1,Players[1])
-        	Counter += 1
-        elif Counter %2 != 0:
-            game_input(2,Players[2])
-            Counter += 1
-    
-    if Counter == 9:
-        print(Stale)
-        display_board(GameBoard)
-    elif (who_wins(GameBoard,Players[1],Players[2]) == True):
-        print(P1Wins)
-        display_board(GameBoard)
-        print(P1Wins)
-    elif (who_wins(GameBoard,Players[1],Players[2]) == False):
-        print(P2Wins)
-        display_board(GameBoard)
-        print(P2Wins)
+	def play_input(Player,Num):
+		input_pos = input(f'\nPlayer{Num}, Please take your turn. [1-9].\n')
+		input_pos = input_pos.upper()
+		if input_check(input_pos,'C') == True:
+			pass
+		else:
+			print('\nInvalid Input\n')
+			input_pos = None
+			play_input(Player,Num)
 
-### Asks the user if they would like to play again.
+		input_index = int(input_pos)
+		if input_pos in GB:
+			GB[input_index] = Player
+		elif GB[input_index] == P1 or P2:
+			print('\nPosition already taken, PLease try again. [1-9]\n')
+			input_pos = None
+			input_index = None
+			play_input(Player,Num)
+
+	display_board(GB)
+
+	while Counter != 10:
+		if winner(GB,P1,P2) != None:
+			Counter = 10
+		elif Counter %2 == 0:
+			display_board(GB)
+			play_input(P1,1)
+			Counter += 1
+		elif Counter %2 != 0:
+			display_board(GB)
+			play_input(P2,2)
+			Counter += 1
+	
+	if Counter == 9:
+		print('\nStalemate.\n')
+		display_board(GB)
+	elif winner(GB,P1,P2) == True:
+		print('\nPlayer 1 Wins.\n')
+		display_board(GB)
+	elif winner(GB,P1,P2) == False:
+		print('\nPlayer 2 Wins\n')
+		display_board(GB)	
+
 def play_again():
-    global GameBoard
-    PlayInput=input("\nWOULD YOU LIKE TO PLAY A AGAIN?[Y/N]\n")
-    PlayInput=PlayInput.upper()
-    if PlayInput in Yes:
-        print("\nEXCELLENT LET'S BEGIN\n")
-        GameBoard = ['#','1','2','3','4','5','6','7','8','9']
-        choose_input()
-        play_game()
-        play_again()
-    elif PlayInput in No:
-        print("\nGOODBYE\n")
-        exit()
-    else:
-    	play_again()
+	again_input = input('\nWould you like to play again? [Y/N]\n')
+	again_input = again_input.upper()
+	if input_check(again_input,'A') == True:
+		pass
+	else:
+		print('\nInvalid Input\n')
+		play_again()
+	if again_input in ('Y'):
+		print('\nGreat, Let us Begin.\n')
+		play_game()
+		play_again()
+	else:
+		print('\nHow unfortunate, Goodbye.\n')
+		exit()
 
-welcome_input()
-
-choose_input()
+welcome()
 
 play_game()
 
