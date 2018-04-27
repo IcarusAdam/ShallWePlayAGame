@@ -1,4 +1,5 @@
 ### Tic Tac Toe
+
 def display_board(B):
 	print(f'\n{B[7]}|{B[8]}|{B[9]}\n-----')
 	print(f'{B[4]}|{B[5]}|{B[6]}\n-----')
@@ -26,6 +27,26 @@ def winner(B,P1,P2):
 	else:
 		return None
 
+#def winner(B,P1,P2):
+#	a = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+#	for triple in a:
+#		if sum([B[index] == P1] for index in triple) == 3:
+#			return True
+#		elif sum([B[index] == P2] for index in triple) == 3:
+#			return False
+#		else:
+#			return None
+
+#def winner(B,P1,P2):
+#	winning_lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[8,6,9],[1,5,9],[3,5,7]]
+#	for [l1,l2,l3] in winning_lines:
+#		if B[l1] == B[l2] == B[l3] == P1:
+#			return True
+#		elif B[l1] == B[l2] == B[l3] == P2:
+#			return False
+#		else:
+#			return None
+
 def welcome():
 	user_input = input('\nWould you like to play a game? [Y/N]\n').upper()
 	if user_input == 'Y':
@@ -49,8 +70,9 @@ def choose_input():
 			break
 		else:
 			print('\nInvalid Input, Please try again.\n')
-			
+
 	print(f'\nPlayer 1 is {Player1}.\nPlayer 2 is {Player2}.\n')
+
 	return (Player1,Player2)
 
 def play_game():
@@ -72,8 +94,9 @@ def play_game():
 		else:
 			print('\nPosition already taken, PLease try again. [1-9]\n')
 			play_input(Player,Num)
-	
+
 	win = None
+
 	while Counter != 10:
 		win = winner(GB,P1,P2)
 		if win is not None:
@@ -91,9 +114,9 @@ def play_game():
 		print('\nPlayer 1 Wins.\n')
 	else:
 		print('\nPlayer 2 Wins\n')
-	
+
 	display_board(GB)
-	
+
 def play_again():
 	again_input = input('\nWould you like to play again? [Y/N]\n').upper()
 	if again_input == 'Y':
@@ -106,6 +129,9 @@ def play_again():
 	else:
 		print('\nInvalid Input, Try again.\n')
 		play_again()
+
 welcome()
+
 play_game()
+
 play_again()
