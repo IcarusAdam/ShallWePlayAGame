@@ -1,5 +1,4 @@
 ### Tic Tac Toe
-
 def display_board(B):
 	print(f'\n{B[7]}|{B[8]}|{B[9]}\n-----')
 	print(f'{B[4]}|{B[5]}|{B[6]}\n-----')
@@ -70,16 +69,13 @@ def choose_input():
 			break
 		else:
 			print('\nInvalid Input, Please try again.\n')
-
 	print(f'\nPlayer 1 is {Player1}.\nPlayer 2 is {Player2}.\n')
-
 	return (Player1,Player2)
 
 def play_game():
 	GB = ['#','1','2','3','4','5','6','7','8','9']
 	P1,P2 = choose_input()
 	Counter = 1
-
 	def play_input(Player,Num):
 		display_board(GB)
 		input_pos = None
@@ -94,9 +90,7 @@ def play_game():
 		else:
 			print('\nPosition already taken, PLease try again. [1-9]\n')
 			play_input(Player,Num)
-
 	win = None
-
 	while Counter != 10:
 		win = winner(GB,P1,P2)
 		if win is not None:
@@ -114,7 +108,6 @@ def play_game():
 		print('\nPlayer 1 Wins.\n')
 	else:
 		print('\nPlayer 2 Wins\n')
-
 	display_board(GB)
 
 def play_again():
